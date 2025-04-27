@@ -2,9 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome Page with Particles</title>
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #0f2027;  /* fallback color */
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027); /* gradient */
+      z-index: -1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #fff;
+    }
+
+    h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      animation: fadeDown 1.5s ease;
+    }
+
+    p {
+      font-size: 24px;
+      margin-bottom: 40px;
+      animation: fadeDown 2s ease;
+    }
+
+    .explore-button {
+      padding: 12px 30px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 30px;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .explore-button:hover {
+      background-color: #45a049;
+    }
+
+    @keyframes fadeDown {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Welcome, you have successfully logged in!</h1>
+
+<div id="particles-js"></div>
+
+<div class="content">
+  <h1>Welcome!</h1>
+  <p>Glad to see you here.</p>
+  <a href="#" class="explore-button">Explore Now</a>
+</div>
+
+<!-- Load Particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+<script>
+  particlesJS('particles-js',
+    {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#ffffff"
+        },
+        "shape": {
+          "type": "circle",
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false
+        },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "move": {
+          "enable": true,
+          "speed": 2
+        }
+      }
+    }
+  );
+</script>
+
 </body>
 </html>
