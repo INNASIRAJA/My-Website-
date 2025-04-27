@@ -1,33 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First Website</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-  <header>
-    <h1>Welcome to My Website!</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
-
-  <main>
-    <section>
-      <h2>About Me</h2>
-      <p>This is where you introduce yourself.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>Copyright © 2025</p>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <title>Search Box with Image Suggestions</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      padding: 20px;  
+    }  
+  
+    .search-container {  
+      position: relative;  
+      width: 300px;  
+    }  
+  
+    .search-box {  
+      width: 100%;  
+      padding: 10px 40px 10px 10px;  
+      font-size: 16px;  
+      border: 5px solid #ccc;  
+      border-radius: 4px;  
+      box-sizing: border-box;  
+    }  
+  
+    .down-arrow {  
+      position: absolute;  
+      top: 50%;  
+      right: 10px;  
+      transform: translateY(-50%);  
+      pointer-events: none;  
+      color: purple;  
+    }  
+  
+    .suggestions {  
+      position: absolute;  
+      top: 100%;  
+      left: 0;  
+      right: 0;  
+      background: purple;  
+      border: 5px solid #ccc;  
+      border-top: none;  
+      z-index: 10;  
+      max-height: 200px;  
+      overflow-y: auto;  
+      display: none;  
+    }  
+  
+    .suggestion-item {  
+      display: flex;  
+      align-items: center;  
+      padding: 8px 10px;  
+      cursor: pointer;  
+    }  
+  
+    .suggestion-item:hover {  
+      background-color: red;  
+    }  
+  
+    .suggestion-item img {  
+      width: 30px;  
+      height: 30px;  
+      object-fit: cover;  
+      margin-right: 10px;  
+      border-radius: 4px;  
+    }  
+  
+    .selected-display {  
+      margin-top: 20px;  
+      display: flex;  
+      align-items: center;  
+      gap: 10px;  
+      font-size: 18px;  
+    }  
+  
+    .selected-display img {  
+      width: 50px;  
+      height: 50px;  
+      object-fit: cover;  
+      border-radius: 4px;  
+    }  
+  </style>  
+</head>  
+<body>  
+  
+<div class="search-container">  
+  <input type="text" class="search-box" placeholder="Search..." id="searchInput">  
+  <span class="down-arrow">🍇</span>  
+  <div class="suggestions" id="suggestionsBox"></div>  
+</div>  
+  
+<div id="selectedDisplay" class="selected-display"></div>  
+  
+<script>  
+  const suggestions = [  
+    { name: "Apple", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWvsellUGKCD7f-0HOnMk2YBVCOiU4zI9vZql1LPDa12H9uaJDL_1qQyk&s=10 text=Apple" },  
+    { name: "Banana", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjYCWHh4P5W_qagRWyi9e3UAfS8jIJ5nqBI48e10YbixouKGOn8XbZQqAB&s=10text=Banana" },  
+    { name: "Blueberry", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGmMYBeWz2UZFYOJd7ovxv9qcVNHmSqpJCaeVbuwprtoHATFyHUBEhaE_7&s=10text=Blue" },  
+    { name: "Cherry", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIl6B-Oj6quHATBfvgODVj9MI6GRWoRV1fzqf_49Ee-STIMDeSmS4lGk&s=10text=Cherry" },  
+    { name: "Mango", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7s6yKdsVK3qoiMx_oZ2sYAcdsbeIoRMPtIMZzdRYKRZn6hYeBqZ2SiKBW&s=10text=Mango" },  
+    { name: "Orange", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPuiqUxRTeoHQKgN6L9rLEy02PJA7aGLdHLQ&stext=Orange" },  
+    { name: "Strawberry", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5Cy0WaP-BI1J0L9xlLFwIqRrX2-jqL80q8939J3SQ9rhINYhliNJNpCYg&s=10text=Straw" }  
+  ];  
+  
+  const input = document.getElementById('searchInput');  
+  const suggestionBox = document.getElementById('suggestionsBox');  
+  const selectedDisplay = document.getElementById('selectedDisplay');  
+  
+  function showSuggestions(items) {  
+    suggestionBox.innerHTML = '';  
+    items.forEach(item => {  
+      const div = document.createElement('div');  
+      div.className = 'suggestion-item';  
+      div.innerHTML = `<img src="${item.img}" alt="${item.name}"><span>${item.name}</span>`;  
+      div.onclick = () => {  
+        input.value = item.name;  
+        suggestionBox.style.display = 'none';  
+        displaySelectedItem(item);  
+      };  
+      suggestionBox.appendChild(div);  
+    });  
+    suggestionBox.style.display = items.length ? 'block' : 'none';  
+  }  
+  
+  function displaySelectedItem(item) {  
+    selectedDisplay.innerHTML = `<img src="${item.img}" alt="${item.name}"><span>${item.name}</span>`;  
+  }  
+  
+  input.addEventListener('input', () => {  
+    const query = input.value.toLowerCase();  
+    const filtered = suggestions.filter(item => item.name.toLowerCase().includes(query));  
+    showSuggestions(filtered);  
+  });  
+  
+  input.addEventListener('focus', () => {  
+    if (input.value.trim() === '') {  
+      showSuggestions(suggestions);  
+    }  
+  });  
+  
+  document.addEventListener('click', (e) => {  
+    if (!e.target.closest('.search-container')) {  
+      suggestionBox.style.display = 'none';  
+    }  
+  });  
+  
+  window.addEventListener('DOMContentLoaded', () => {  
+    showSuggestions(suggestions);  
+  });  
+</script>  
+  
+</body>  
 </html>
