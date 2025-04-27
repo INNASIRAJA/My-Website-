@@ -4,9 +4,78 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Page</title>
+
   <style>
-    /* (your previous CSS here...) */
+    body {
+      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+    nav a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: white;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin-top: 20px;
+    }
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .login-container button:hover {
+      background-color: #45a049;
+    }
+    footer {
+      background-color: purple;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
   </style>
+
 </head>
 
 <body>
@@ -41,14 +110,13 @@
       var username = document.getElementById("username").value;
       var password = document.getElementById("password").value;
 
-      // Set your correct username and password here
       if(username === "admin" && password === "1234"){
-        // Redirect to another page
-        window.location.href = "welcome.html";  // your new page
+        window.location.href = "welcome.html";  // your next page
       } else {
         alert("Incorrect username or password!");
       }
     });
   </script>
+
 </body>
 </html>
