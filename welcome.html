@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Setting</title>
+  <title>Welcome</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body, html {
@@ -12,6 +12,7 @@
       height: 100%;
       overflow: hidden;
       font-family: 'Poppins', sans-serif;
+      background: #0f2027;
       background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
     }
     #particles-js {
@@ -64,19 +65,13 @@
 <div id="particles-js"></div>
 
 <div class="welcome-content">
-  <h1>Do You Want To Logout?</h1>
-  <p>You are currently logged in.</p>
+  <h1>Welcome!</h1>
+  <p>You're now logged in.</p>
   <button class="logout-button" onclick="logout()">Logout</button>
 </div>
 
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
-  // Redirect to login if not logged in
-  if (localStorage.getItem('loggedIn') !== 'true') {
-    window.location.href = 'index.html';
-  }
-
-  // Initialize particles
   particlesJS('particles-js', {
     "particles": {
       "number": { "value": 100 },
